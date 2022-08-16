@@ -3,8 +3,8 @@ import {createGlobalStyle} from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
   :root {
     --maxWidth: 1280px;
-    --white: #666;
-    --lightGrey: #eee;
+    --white: #eee;
+    --lightGrey: #666;
     --medGrey: #353535;
     --darkGrey: #1c1c1c;
     --fontSuperBig: 2.5rem;
