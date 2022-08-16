@@ -13,6 +13,7 @@ import NoImage from '../images/no_image.jpg'
 import HeroImage from "./HeroImage";
 import Grid from "./Grid";
 import Thumb from "./Thumb";
+import Spinner from "./Spinner";
 
 
 const Home = () => {
@@ -34,6 +35,7 @@ const Home = () => {
                                : NoImage} movieId={movie.id}></Thumb>
                 ))}
             </Grid>
+            <Spinner/>
         </>
     );
 };
