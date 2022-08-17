@@ -1,13 +1,11 @@
-
-
 import API from '../API'
 import {useCallback, useEffect, useState} from "react";
+import {isPersistedState} from "../helpers";
 
 export const useMovieFetch = movieId => {
     const [state, setState] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
 
 
     useEffect(() => {
@@ -35,8 +33,23 @@ export const useMovieFetch = movieId => {
                 setError(true)
             }
         }
+
+        const sessionState = isPersistedState(movieId);
+
+        if (sessionState) {
+            setState(sessionState);
+            setLoading(false);
+            return;
+        }
+
         fetchMovie();
     }, [movieId])
+
+    //Write to sessionStorage
+    useEffect(() => {
+            sessionStorage.setItem(movieId, JSON.stringify(state))
+        }, [movieId, state]
+    )
 
     return {state, loading, error}
 }

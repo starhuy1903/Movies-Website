@@ -1,5 +1,6 @@
 import {useEffect, useState, useRef } from "react";
 import API from "../API";
+import {isPersistedState} from "../helpers";
 
 const initialState = {
     page: 0,
@@ -15,7 +16,7 @@ export const useHomeFetch = () => {
     const [error, setError] = useState(false);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-    console.log(searchTerm);
+    // console.log(searchTerm);
 
     const fetchMovies = async (page, searchTerm = "") => {
         try {
@@ -37,6 +38,15 @@ export const useHomeFetch = () => {
     }
 
     useEffect(() => {
+        if(!searchTerm) {
+            const sessionState = isPersistedState('homeState')
+
+            if(sessionState) {
+                console.log("Grabbing ")
+                setState(sessionState);
+                return;
+            }
+        }
         setState(initialState);
         fetchMovies(1, searchTerm);
     }, [searchTerm])
@@ -48,6 +58,11 @@ export const useHomeFetch = () => {
         setIsLoadingMore(false);
 
     }, [isLoadingMore, searchTerm, state.page])
+
+    //Write to sessionStorage
+    useEffect(() => {
+        if(!searchTerm) sessionStorage.setItem('homeState', JSON.stringify(state))
+    }, [searchTerm, state])
 
     return {state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore}
 }
