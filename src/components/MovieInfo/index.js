@@ -5,6 +5,7 @@ import NoImage from '../../images/no_image.jpg'
 import React from 'react';
 import {Content, Text, Wrapper} from "./MovieInfo.styles";
 import Thumb from "../Thumb";
+import PropTypes from "prop-types";
 
 const MovieInfo = ({movie}) => {
     return (
@@ -38,5 +39,9 @@ const MovieInfo = ({movie}) => {
         </Wrapper>
     );
 };
+
+MovieInfo.propTypes = {
+    movie: PropTypes.object
+}
 
 export default MovieInfo;
