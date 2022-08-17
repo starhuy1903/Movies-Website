@@ -1,5 +1,5 @@
 import API from '../API'
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {isPersistedState} from "../helpers";
 
 export const useMovieFetch = movieId => {
