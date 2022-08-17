@@ -7,21 +7,24 @@ import {useParams} from "react-router-dom";
 import Spinner from "./Spinner";
 import BreadCrumb from "./BreadCrumb";
 import MovieInfo from "./MovieInfo";
+import MovieInfoBar from "./MovieInfoBar";
 
 const Movie = () => {
-    const { movieId } = useParams();
+    const {movieId} = useParams();
 
-    const {state: movie, loading, error} = useMovieFetch(movieId)
+    const {state: movie, loading, error} = useMovieFetch(movieId);
 
-    if(loading) return <Spinner/>
-    if(error) return <div>Something went wrong...</div>
+    if (loading) return <Spinner/>
+    if (error) return <div>Something went wrong...</div>
 
     return (
         <>
             <BreadCrumb movieTitle={movie.original_title}/>
             <MovieInfo movie={movie}></MovieInfo>
+            <MovieInfoBar time={movie.runtime} budget={movie.budget} revenue={movie.revenue}/>
         </>
     );
+
 };
 
 export default Movie;
