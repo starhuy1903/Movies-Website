@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useRef, useState} from 'react';
+import React, {Component} from 'react';
 
 import searchIcon from '../../images/search-icon.svg'
 import {Content, Wrapper} from "./SearchBar.styles";
@@ -17,26 +17,12 @@ class SearchBar extends Component {
 
             clearTimeout(this.timeout)
 
-            const timer = setTimeout(() => {
+            this.timeout = setTimeout(() => {
                 const {value} = this.state;
                 setSearchTerm(value);
             }, 500)
         }
     }
-
-
-    // useEffect(() => {
-    //     if(initial.current) {
-    //         initial.current = false;
-    //         return;
-    //     }
-    //
-    //     const timer = setTimeout(() => {
-    //         setSearchTerm(state);
-    //     }, 500)
-    //
-    //     return () => clearTimeout(timer)
-    // }, [setSearchTerm, state])
 
     render() {
         const {value} = this.state;
